@@ -57,31 +57,30 @@ fn app() -> Html {
 #[function_component(Footer)]
 fn footer() -> Html {
     
-    // let time = SystemTime::now();
-    // let char_index = (time.elapsed().unwrap().as_millis() % (0x1F64F - 0x1F600)) as u32;
-  /*  let final_view = char::from_u32(0x1F600).unwrap();
-    let final_view = format!("{}", time.elapsed().unwrap().as_millis());*/
-    html! {
-            <footer>
-        <p>{format!("© 2025 Моя страница. Наверное какие-то права защищены!!! {}", "≈")}</p>
-    </footer>
-    }
-}
-#[function_component(Nav)]
-fn nav() -> Html {
-    html! {
-        <nav>
-            <ul>
-                <li><a href="/" class="brand">{"Micialware"}</a></li>
-                <li><a href="flagships">{"Флагманы"}</a></li>
-                <li><a href="side_projects">{"Другие проекты"}</a></li>
-                <li><a href="services">{"Услуги"}</a></li>
-                <li><a href="https://github.com/YaslePoy" class="github-link" target="_blank"><img src="img/github.svg" alt="github"/>{"GitHub"}</a></li>
-            </ul>
-        </nav>
-    }
-}
-
-fn main() {
-    yew::Renderer::<App>::new().render();
-}
+      let char_index = (getrandom::u32().unwrap() % (0x1F64F - 0x1F600)) as u32;
+      let final_view = char::from_u32(0x1F600 + char_index).unwrap();
+     /* let final_view = format!("{}", time.elapsed().unwrap().as_millis());*/
+      html! {
+              <footer>
+          <p>{format!("© 2025 Моя страница. Наверное какие-то права защищены!!! {}", final_view)}</p>
+      </footer>
+      }
+  }
+  #[function_component(Nav)]
+  fn nav() -> Html {
+      html! {
+          <nav>
+              <ul>
+                  <li><a href="/" class="brand">{"Micialware"}</a></li>
+                  <li><a href="flagships">{"Флагманы"}</a></li>
+                  <li><a href="side_projects">{"Другие проекты"}</a></li>
+                  <li><a href="services">{"Услуги"}</a></li>
+                  <li><a href="https://github.com/YaslePoy" class="github-link" target="_blank"><img src="img/github.svg" alt="github"/>{"GitHub"}</a></li>
+              </ul>
+          </nav>
+      }
+  }
+  
+  fn main() {
+      yew::Renderer::<App>::new().render();
+  }
