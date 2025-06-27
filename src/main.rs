@@ -1,8 +1,11 @@
+mod flagships;
 mod home;
 
+use std::time::SystemTime;
+use crate::flagships::flagships;
 use crate::home::home;
 use yew::prelude::*;
-use yew_router::Routable;
+use yew_router::{BrowserRouter, Routable, Switch};
 
 #[derive(Clone, Routable, PartialEq)]
 enum Route {
@@ -31,30 +34,48 @@ fn switch(routes: Route) -> Html {
     match routes {
         Route::Home => home(),
         Route::NotFound => html! { <h1>{ "404" }</h1> },
-        Route::Flagships => switch(Route::NotFound),
+        Route::Flagships => flagships(),
         Route::SideProjects => switch(Route::NotFound),
         Route::Services => switch(Route::NotFound),
         Route::Mroa => switch(Route::NotFound),
         Route::Mroactg => switch(Route::NotFound),
         Route::TermsBasic => switch(Route::NotFound),
-        Route::TermsUnlimited => switch(Route::NotFound)
+        Route::TermsUnlimited => switch(Route::NotFound),
     }
 }
 
 #[function_component(App)]
 fn app() -> Html {
-    home()
+    html! {
+        
+        <BrowserRouter>
+            <Switch<Route> render={switch} />
+        </BrowserRouter>
+    }
 }
 
+#[function_component(Footer)]
+fn footer() -> Html {
+    
+    // let time = SystemTime::now();
+    // let char_index = (time.elapsed().unwrap().as_millis() % (0x1F64F - 0x1F600)) as u32;
+  /*  let final_view = char::from_u32(0x1F600).unwrap();
+    let final_view = format!("{}", time.elapsed().unwrap().as_millis());*/
+    html! {
+            <footer>
+        <p>{format!("© 2025 Моя страница. Наверное какие-то права защищены!!! {}", "≈")}</p>
+    </footer>
+    }
+}
 #[function_component(Nav)]
 fn nav() -> Html {
     html! {
         <nav>
             <ul>
-                <li><a href="index.html" class="brand">{"Micialware"}</a></li>
-                <li><a href="flagships.html">{"Флагманы"}</a></li>
-                <li><a href="#projects">{"Другие проекты"}</a></li>
-                <li><a href="services.html">{"Услуги"}</a></li>
+                <li><a href="/" class="brand">{"Micialware"}</a></li>
+                <li><a href="flagships">{"Флагманы"}</a></li>
+                <li><a href="side_projects">{"Другие проекты"}</a></li>
+                <li><a href="services">{"Услуги"}</a></li>
                 <li><a href="https://github.com/YaslePoy" class="github-link" target="_blank"><img src="img/github.svg" alt="github"/>{"GitHub"}</a></li>
             </ul>
         </nav>
