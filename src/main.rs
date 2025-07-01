@@ -1,9 +1,10 @@
 mod flagships;
 mod home;
+mod services;
 
-use std::time::SystemTime;
 use crate::flagships::flagships;
 use crate::home::home;
+use crate::services::ServicesPage;
 use yew::prelude::*;
 use yew_router::{BrowserRouter, Routable, Switch};
 
@@ -36,7 +37,7 @@ fn switch(routes: Route) -> Html {
         Route::NotFound => html! { <h1>{ "404" }</h1> },
         Route::Flagships => flagships(),
         Route::SideProjects => switch(Route::NotFound),
-        Route::Services => switch(Route::NotFound),
+        Route::Services => html!{ <ServicesPage/> },
         Route::Mroa => switch(Route::NotFound),
         Route::Mroactg => switch(Route::NotFound),
         Route::TermsBasic => switch(Route::NotFound),
