@@ -9,3 +9,4 @@ yew-router = "0.18.0"
 getrandom = {version = "0.3.3", features = ["wasm_js"]}
 gloo = "0.11.0"
 js-sys = "0.3.77"
+log = "0.4.27"
